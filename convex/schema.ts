@@ -7,5 +7,11 @@ export default defineSchema({
     users: defineTable({
         username: v.string(),
         externalId: v.string()
-    }).index("byExternalId", ["externalId"]).index("byUsername", ["username"])
+    }).index("byExternalId", ["externalId"]).index("byUsername", ["username"]),
+    
+    subreddit: defineTable({
+        name: v.string(),
+        description: v.optional(v.string()),
+        authorId: v.id("users")
+    })
 });
