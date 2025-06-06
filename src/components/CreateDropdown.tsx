@@ -16,7 +16,7 @@ const CreateDropdown = ({ isOpen, onClose}: CreateDropdownProps) => {
     const subredditMatch = location.pathname.match(/^\/r\/([^/]+)/); // returns an array with two items 1) /r 2) the match
     const currentSubreddit = subredditMatch ? subredditMatch[1] : null;
 
-    console.log('cur subreddit', currentSubreddit);
+    // console.log('cur subreddit', currentSubreddit);
 
     if( !isOpen ) return null;
 
