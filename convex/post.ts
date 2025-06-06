@@ -2,6 +2,7 @@ import { mutation, query, QueryCtx } from "./_generated/server";
 import { ConvexError, v } from "convex/values";
 import { getCurrentUserOrThrow } from "./users";
 import { Doc, Id } from "./_generated/dataModel";
+import { counts, postCountKey } from "./counter";
 
 type EnrichedPost = Omit<Doc<"post">, "subreddit"> & {
     author: {username: string} | undefined;
@@ -31,6 +32,8 @@ export const create = mutation({
             authorId: user._id,
             image: args.storageId || undefined
         });
+
+        await counts.inc(ctx, postCountKey(user._id));
 
         return postId;
     }
@@ -103,6 +106,7 @@ export const deletePost = mutation({
             throw new ConvexError({message: ERROR_MESSAGES.UNAUTHORIZED_DELETE});
         }
 
+        await counts.dec(ctx, postCountKey(user._id));
         await ctx.db.delete(args.id);
     }
 });

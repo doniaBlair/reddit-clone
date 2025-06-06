@@ -21,5 +21,21 @@ export default defineSchema({
         subreddit: v.id('subreddit'),
         authorId: v.id('users'),
         image: v.optional(v.id('_storage'))
-    }).index('bySubreddit', ['subreddit']).index('byAuthor', ['authorId'])
+    }).index('bySubreddit', ['subreddit']).index('byAuthor', ['authorId']),
+
+    comments: defineTable({
+        content: v.string(),
+        postId: v.id('post'),
+        authorId: v.id('users')
+    }).index('byPost', ['postId']),
+
+    downvote: defineTable({
+        postId: v.id('post'),
+        userId: v.id('users')
+    }).index('byPost', ['postId']).index('byUser', ['userId']),
+
+    upvote: defineTable({
+        postId: v.id('post'),
+        userId: v.id('users')
+    }).index('byPost', ['postId']).index('byUser', ['userId'])
 });
