@@ -13,6 +13,8 @@ export default defineSchema({
         name: v.string(),
         description: v.optional(v.string()),
         authorId: v.id("users")
+    }).searchIndex('search_body', {
+        searchField: 'name'
     }),
 
     post: defineTable({
@@ -21,7 +23,10 @@ export default defineSchema({
         subreddit: v.id('subreddit'),
         authorId: v.id('users'),
         image: v.optional(v.id('_storage'))
-    }).index('bySubreddit', ['subreddit']).index('byAuthor', ['authorId']),
+    }).index('bySubreddit', ['subreddit']).index('byAuthor', ['authorId']).searchIndex('search_body', {
+        searchField: 'subject', 
+        filterFields: ['subreddit']
+    }),
 
     comments: defineTable({
         content: v.string(),
