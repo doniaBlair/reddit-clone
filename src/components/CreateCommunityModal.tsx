@@ -39,7 +39,7 @@ const CreateCommunityModal = ({ isOpen, onClose }: CreateCommunityModalProps) =>
             console.log(result);
             onClose();
         }).catch((err) => {
-            setError(`Failed to create community. ${err.data.message}`)
+            setError(`Failed to create community. ${err}`);
         }).finally(() => setIsLoading(false));
     }
 
