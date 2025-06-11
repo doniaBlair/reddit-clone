@@ -1,4 +1,4 @@
-import { use, useState } from "react";
+import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 import { api } from "../../convex/_generated/api";
