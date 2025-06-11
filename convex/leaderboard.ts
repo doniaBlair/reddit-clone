@@ -9,7 +9,7 @@ export const getTopPosts = query({
     },
     handler: async (ctx, args) => {
         const limit = args.limit ?? 10;
-        const now = new Date();
+        // const now = new Date();
         // const oneDayAgo = new Date(now.getTime() - 1000 * 60 * 60 * 24);
         const posts = await ctx.db
             .query('post')
