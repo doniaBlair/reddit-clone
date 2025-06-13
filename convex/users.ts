@@ -52,6 +52,7 @@ export async function getCurrentUserOrThrow(ctx: QueryCtx) {
 
 export async function getCurrentUser(ctx: QueryCtx) {
   const identity = await ctx.auth.getUserIdentity();
+  console.log('identity from convex', identity);
   if (identity === null) {
     return null;
   }
