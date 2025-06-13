@@ -10,6 +10,7 @@ export const create = mutation({
     },
     handler: async (ctx, args) => {
         const user = await getCurrentUserOrThrow(ctx);
+        console.log('user from create function', user);
         const subreddits = await ctx.db.query('subreddit').collect();
         if( subreddits.some((s) => s.name === args.name) ) {
             throw new ConvexError({ message: "Subreddit already exists." });
